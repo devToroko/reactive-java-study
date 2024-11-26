@@ -1,7 +1,6 @@
-package coding.toast;
+package coding.toast.sec01;
 
 import coding.toast.sec01.publisher.PublisherImpl;
-import coding.toast.sec01.publisher.SubscriptionImpl;
 import coding.toast.sec01.subscriber.SubscriberImpl;
 import lombok.extern.slf4j.Slf4j;
 
