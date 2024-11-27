@@ -12,10 +12,10 @@ public class Lec08MonoFromFuture {
 	
 	public static void main(String[] args) {
 		// Mono.fromFuture(getName());
-		Mono.fromFuture(() -> getName())
+		Mono.fromFuture(Lec08MonoFromFuture::getName)
 			.subscribe(Util.subscriber());
-		
-		Util.sleepSecond(1);
+
+		Util.sleepSeconds(1);
 	}
 	
 	private static CompletableFuture<String> getName() {
