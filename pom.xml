@@ -10,8 +10,11 @@
 
   <properties>
     <java.version>21</java.version>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <reactor.version>2023.0.4</reactor.version>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <reactor.version>2023.0.12</reactor.version>
     <logback.version>1.5.3</logback.version>
     <faker.version>1.0.2</faker.version>
     <junit.version>5.10.1</junit.version>
@@ -33,6 +36,12 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>2.3</version>
     </dependency>
     <dependency>
       <groupId>com.github.javafaker</groupId>
@@ -70,18 +79,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>21</source>
-          <target>21</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
 </project>
