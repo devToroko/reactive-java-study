@@ -18,5 +18,4 @@ public class Lec03MonoSubscribe {
 		);
 		
 	}
-	
 }
