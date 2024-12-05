@@ -7,28 +7,25 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 
 @Slf4j
-public class Lec02HotPublisher {
+public class Lec03HotPublisherAutoConnect {
     public static void main(String[] args) {
-
-        // almost same as movieStream().share();
-        // var movieFlux = movieStream().publish().refCount(1);  // at this point, hot publisher won't work but waits for at least one subscriber to subscribe.
-
-        var movieFlux = movieStream().share(); // adding share! this will create hot publisher
-        // log "received the request" will print only once.
+        
+        // var movieFlux = movieStream().publish().autoConnect(); // minimum subscriber default 1
+        var movieFlux = movieStream().publish().autoConnect(0); // subscriber 있든 없든 ㄱㄱ
+        
         Util.sleepSeconds(2);
-        log.info("sam will subscribe!");
         movieFlux
                 .take(4)
                 .subscribe(Util.subscriber("sam"));
 
         Util.sleepSeconds(3);
-        log.info("mike will subscribe!");
+        
         movieFlux
-                .take(3) // 1. this will call cancel signal to upstream, but doesn't affect sam. you can not cancel hot publisher.
+                .take(3)
                 .subscribe(Util.subscriber("mike"));
-
-        // if there is no subscriber on the hot publisher the hot publisher by default it will stop automatically.
-        Util.sleepSeconds(15); // because of delayElements operator
+        
+        // subscriber is 0? so what? I'm going to publish anyway!
+        Util.sleepSeconds(15);
     }
 
     private static Flux<String> movieStream() {
