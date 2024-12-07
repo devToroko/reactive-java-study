@@ -22,7 +22,7 @@ public class DefaultSubscriber<T> implements Subscriber<T> {
 
 	@Override
 	public void onNext(T item) {
-		log.info("{} received {}", this.name, item);
+		log.info("{} received : [{}]", this.name, item);
 	}
 
 	@Override
