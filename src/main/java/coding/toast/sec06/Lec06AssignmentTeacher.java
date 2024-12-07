@@ -5,6 +5,7 @@ import coding.toast.sec06.assignment.teacher.ExternalServiceClient;
 import coding.toast.sec06.assignment.teacher.InventoryService;
 import coding.toast.sec06.assignment.teacher.RevenueService;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.scheduler.Schedulers;
 
 @Slf4j
 public class Lec06AssignmentTeacher {
@@ -14,8 +15,13 @@ public class Lec06AssignmentTeacher {
 		var inventoryService = new InventoryService();
 		var revenueService = new RevenueService();
 		
-		client.orderStream().subscribe(inventoryService::consume);
-		client.orderStream().subscribe(revenueService::consume);
+		client.orderStream()
+			.subscribeOn(Schedulers.boundedElastic())
+			.subscribe(inventoryService::consume);
+		
+		client.orderStream()
+			.subscribeOn(Schedulers.boundedElastic())
+			.subscribe(revenueService::consume);
 		
 		inventoryService.stream().subscribe(Util.subscriber("inventory"));
 		revenueService.stream().subscribe(Util.subscriber("revenue"));
